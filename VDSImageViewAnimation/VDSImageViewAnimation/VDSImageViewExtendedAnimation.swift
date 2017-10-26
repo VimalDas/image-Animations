@@ -47,20 +47,22 @@ class VDSImageViewExtendedAnimation: NSObject {
         scroll?.delegate = self
         scroll?.bounces = true
         scroll?.contentSize = screenSize
-        scroll?.backgroundColor = .black
+        scroll?.backgroundColor = UIColor.black
         scroll?.isUserInteractionEnabled = true
         scroll?.minimumZoomScale = 1
         scroll?.zoomScale = 1
         scroll?.maximumZoomScale = 1
-        
+        scroll?.alpha = 0
     }
     
     private func animatedbackToNormal() {
         self.scroll?.removeFromSuperview()
         self.animatedImageView.removeFromSuperview()
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.5, animations: {
             self.parentImageView?.frame.size = self.parentImageViewSize
             self.parentImageView?.center = self.parentImageViewCenter
+            
+        }) { (success) in
         }
         sizeChanged = false
     }
@@ -168,7 +170,11 @@ class VDSImageViewExtendedAnimation: NSObject {
                     self.parentImageView?.center = self.parentCenter
                 }) { (true) in
                     if let view = self.parentView {
+                        self.scroll?.alpha = 0
                         view.addSubview(self.scroll!)
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.scroll?.alpha = 1
+                        })
                         self.scroll?.addSubview(self.animatedImageView)
                         self.animatedImageView.centerXAnchor.constraint(equalTo: (self.scroll?.centerXAnchor)!).isActive = true
                         self.animatedImageView.centerYAnchor.constraint(equalTo: (self.scroll?.centerYAnchor)!).isActive = true
