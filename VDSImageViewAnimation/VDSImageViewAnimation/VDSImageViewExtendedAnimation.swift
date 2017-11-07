@@ -8,7 +8,7 @@
 
 import UIKit
  
-class VDSImageViewExtendedAnimation: NSObject {
+class VDSAnimation: NSObject {
     
     private var screenHeight = UIScreen.main.bounds.height
     private var screenWidth = UIScreen.main.bounds.width
@@ -26,6 +26,12 @@ class VDSImageViewExtendedAnimation: NSObject {
     private var imageViewZoomed: Bool = false
     private var sizeChanged: Bool = false
     private var scrollEnabled: Bool = false
+    
+    static let shared = VDSAnimation()
+    
+    private override init() {
+        
+    }
     
     fileprivate let animatedImageView: UIImageView = {
         let imageView = UIImageView()
@@ -179,7 +185,7 @@ class VDSImageViewExtendedAnimation: NSObject {
     }
         
 }
-extension VDSImageViewExtendedAnimation : UIScrollViewDelegate {
+extension VDSAnimation : UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return animatedImageView
     }

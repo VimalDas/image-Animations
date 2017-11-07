@@ -16,16 +16,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var img3: UIImageView!
     @IBOutlet weak var img4: UIImageView!
 
-    let obj = VDSImageViewExtendedAnimation()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         img1.layer.cornerRadius = 60
         img1.layer.masksToBounds = true
         
-        obj.setupAnimation(in: self.view, imageView: img1)
-        obj.setupAnimation(in: self.view, imageView: img2)
-        obj.setupAnimation(in: self.view, imageView: img3)
-        obj.setupAnimation(in: self.view, imageView: img4)
+        VDSAnimation.shared.setupAnimation(in: self.view, imageView: img1)
+        VDSAnimation.shared.setupAnimation(in: self.view, imageView: img2)
+        VDSAnimation.shared.setupAnimation(in: self.view, imageView: img3)
+        VDSAnimation.shared.setupAnimation(in: self.view, imageView: img4)
 
     }
 
